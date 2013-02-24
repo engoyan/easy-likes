@@ -35,7 +35,9 @@ App::after(function($request, $response)
 
 Route::filter('auth', function()
 {
-	if (Auth::guest()) return Redirect::route('login');
+    $admin_url = Config::get('admin.url');
+    $url = Route::getResourceUri("{$admin_url}/login");
+	if (Auth::guest()) return Redirect::to($url);
 });
 
 

@@ -9,10 +9,13 @@ class BaseController extends Controller {
 	 */
 	protected function setupLayout()
 	{
+		
 		if ( ! is_null($this->layout))
 		{
 			$this->layout = View::make($this->layout);
 		}
+		$this->adminUrl = Config::get('admin.url');
+        View::share('admin_url', $this->adminUrl);
 	}
 
 }

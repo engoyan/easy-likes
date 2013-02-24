@@ -24,16 +24,54 @@
             font-size: 12em;
             color: #006DCC;
         }
+
+    /* Wrapper for page content to push down footer */
+      #wrap {
+        min-height: 100%;
+        height: auto !important;
+        height: 100%;
+        /* Negative indent footer by it's height */
+        margin: 0 auto -60px;
+      }
+
+      /* Set the fixed height of the footer here */
+      #push,
+      #footer {
+        height: 60px;
+      }
+      #footer {
+        background-color: #f5f5f5;
+      }
+
+      /* Lastly, apply responsive CSS fixes as necessary */
+      @media (max-width: 767px) {
+        #footer {
+          margin-left: -20px;
+          margin-right: -20px;
+          padding-left: 20px;
+          padding-right: 20px;
+        }
+      }
+
+       .container .credit {
+        margin: 20px 0;
+      }
+
+
     /* GLOBAL STYLES
     -------------------------------------------------- */
     /* Padding below the footer and lighter body text */
 
     body {
-      padding-bottom: 40px;
       color: #5a5a5a;
     }
 
 
+     html,
+      body {
+        height: 100%;
+        /* The html and body elements cannot have any padding or margin. */
+      }
 
     /* CUSTOMIZE THE NAVBAR
     -------------------------------------------------- */
@@ -264,7 +302,7 @@
 
     }
     </style>
-
+    @yield('style')
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="../assets/js/html5shiv.js"></script>
@@ -275,10 +313,15 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
-   <link rel="shortcut icon" href="../assets/ico/favicon.png">
+    <link rel="shortcut icon" href="../assets/ico/favicon.png">
   </head>
 
   <body>
+
+    <!-- Part 1: Wrap all page content here -->
+    <div id="wrap">
+
+
 
 
 
@@ -296,16 +339,33 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="brand" href="#">Easy Likes</a>
+            <a class="brand" href="/">Easy Likes</a>
             <!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->
             <div class="nav-collapse collapse">
               <ul class="nav">
-                <li class="active"><a href="#">Home</a></li>
+                <li class="active"><a href="/">Home</a></li>
                 <li><a href="#about">About</a></li>
+                <li><a href="/{{ $admin_url }}">Admin</a></li>
                 <li><a href="#contact">Contact</a></li>
                 <!-- Read about Bootstrap dropdowns at http://twitter.github.com/bootstrap/javascript.html#dropdowns -->
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li class="divider"></li>
+                    <li class="nav-header">Nav header</li>
+                    <li><a href="#">Separated link</a></li>
+                    <li><a href="#">One more separated link</a></li>
+                  </ul>
+                </li>
+              </ul>
+              <ul class="nav pull-right">
+                
+                <!-- Read about Bootstrap dropdowns at http://twitter.github.com/bootstrap/javascript.html#dropdowns -->
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">User Name <b class="caret"></b></a>
                   <ul class="dropdown-menu">
                     <li><a href="#">Action</a></li>
                     <li><a href="#">Another action</a></li>
@@ -325,20 +385,27 @@
     </div><!-- /.navbar-wrapper -->
 
     @section('carousel')
-      <div class="top-pad"></div>
+    <div class="top-pad"></div>
     @show
-    @yield('content')
-    
 
+    <!-- Wrap the rest of the page in another container to center all the content. -->
+    <div class="container fullh marketing">
+      @yield('content')
 
-      <!-- FOOTER -->
-      <footer>
-        <p class="pull-right"><a href="#">Back to top</a></p>
-        <p>&copy; 2013 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
-      </footer>
 
     </div><!-- /.container -->
+  <div id="push"></div>
+</div>
 
+
+    <div id="footer">
+      <div class="container">
+        <p class="muted credit">
+            <p class="pull-right"><a href="#">Back to top</a></p>
+            <p>&copy; 2013 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+        </p>
+      </div>
+    </div>
 
 
     <!-- Le javascript

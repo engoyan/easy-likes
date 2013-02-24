@@ -11,7 +11,18 @@
 |
 */
 
-Route::get('/', function()
+Route::resource("/", 'HomeController');
+
+$admin_url = Config::get('admin.url');
+
+Route::resource("{$admin_url}/login", 'LoginController', array('only' => array('index', 'store')));
+
+Route::group(array('prefix' => $admin_url, 'before' => 'auth'), function()
 {
-	return View::make('hello');
+
+    Route::get('/', array('as' => 'admin', function()
+    {
+        return 'admin page';
+    }));
+
 });
